@@ -9,13 +9,19 @@
 <body>
   <h2>Enter decimal number</h2>
 
-  <input type="text">
+  <input type="text" class="js-input">
 
-  <br>
+  <div class="buttons">
+    <button class="js-convert">Convert</button>
+    <button class="js-reset">Reset</button>
+    <button class="js-swap">Swap</button>  
+  </div>
 
-  <button>Convert</button>
-  <button>Reset</button>
-  <button>Swap</button>
+  <div class="results">
+    <div><input type="text" readonly></div>
+    <div><span class="js-result"></span></div>
+  </div>
+
 
   <script src="decimal-binary.js"></script>
 
