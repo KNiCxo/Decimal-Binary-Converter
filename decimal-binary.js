@@ -12,9 +12,15 @@ let resultElement = document.querySelector('.js-result');
 // Boolean to check if converting to binary or decimal
 let isDecimal = true;
 
+// Boolean to check if the input contains a fraction
 let isFraction = false;
 
+// Keeps track of the position of the decimal point
 let periodPos = 0;
+
+// Stores the whole number and fraction portions of the input
+let wholeNumber;
+let fraction;
 
 const checkInput = (value) => {
   let periodCount = 0;
@@ -44,8 +50,6 @@ const checkInput = (value) => {
 }
 
 const handleInput = (value) => {
-  let wholeNumber;
-  let fraction;
   if (isFraction) {
     if (periodPos === 0) {
       wholeNumber = '';
@@ -54,6 +58,8 @@ const handleInput = (value) => {
       wholeNumber = value.substring(0, periodPos);
       fraction = '0.' + value.substring(periodPos + 1, value.length);
     }
+  } else {
+    wholeNumber = value;
   }
   console.log(wholeNumber);
   console.log(fraction);
