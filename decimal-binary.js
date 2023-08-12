@@ -1,5 +1,8 @@
-// Input field element
+// Input and ouutput field elements
 let userInput = document.querySelector('.js-input');
+let userOutput = document.querySelector('.js-output');
+userInput.value = '';
+userOutput.value = '';
 
 // Button elements
 let convertButton = document.querySelector('.js-convert');
@@ -24,9 +27,14 @@ let fraction;
 
 const checkInput = (value) => {
   let periodCount = 0;
+
+  if (!value) {
+    return;
+  }
+  
   if (value.match('[^.0-9]')) {
     resultElement.innerHTML = `Error: Must only contain decimal digits`;
-    return;
+    return false;
   } else {
     resultElement.innerHTML = ``;
   }
@@ -40,13 +48,13 @@ const checkInput = (value) => {
 
   if (periodCount > 1) {
     resultElement.innerHTML = `Error: Must only contain one decimal point`;
+    return false;
   } else if (periodCount === 1) {
     isFraction = true;
   } else {
     isFraction = false;
   }
-  console.log(`Is fraction ${isFraction}`);
-  console.log(`Position of decimal point ${periodPos}`);
+  return true;
 }
 
 const handleInput = (value) => {
@@ -61,16 +69,31 @@ const handleInput = (value) => {
   } else {
     wholeNumber = value;
   }
-  console.log(wholeNumber);
-  console.log(fraction);
 };
 
-const decimalToBinary = (decimalValue) => {
+const decimalToBinary = (output) => {
+  let binaryNumber = '';
 
+  if (Number(wholeNumber) === 0) {
+    binaryNumber = '0';
+  } else {
+    while (Number(wholeNumber) > 0) {
+      binaryNumber = (wholeNumber % 2).toString() + binaryNumber;
+      wholeNumber = Math.floor(wholeNumber / 2);
+    }
+  }
+  
+  console.log(binaryNumber);
+  output.value = `${binaryNumber}`;
 };
 
-convertButton.addEventListener('click', () => {
-  checkInput(userInput.value);
+const convert = () => {
+  if (!checkInput(userInput.value)) {
+    return;
+  }
   handleInput(userInput.value);
-});
+  decimalToBinary(userOutput);
+}
+ 
+convertButton.addEventListener('click', () => convert());
 
