@@ -73,6 +73,7 @@ const handleInput = (value) => {
 
 const decimalToBinary = (output) => {
   let binaryNumber = '';
+  let binaryFraction = '';
 
   if (Number(wholeNumber) === 0) {
     binaryNumber = '0';
@@ -82,9 +83,30 @@ const decimalToBinary = (output) => {
       wholeNumber = Math.floor(wholeNumber / 2);
     }
   }
+
+  if (isFraction) {
+    let fractionDigits = 0;
+
+    while (fraction != 0) {
+      if (fractionDigits > 11) {
+        break;
+      }
+
+      fraction *= 2;
+      console.log(fraction);
+      if (Math.ceil(fraction) === 2 || (fraction - 1) === 0) {
+        binaryFraction = binaryFraction + '1';
+        fraction--;
+      } else {
+        binaryFraction = binaryFraction + '0';
+      }
+      fractionDigits++;
+      console.log(binaryFraction);
+    }
+  }
   
   console.log(binaryNumber);
-  output.value = `${binaryNumber}`;
+  output.value = isFraction ? `${binaryNumber}.${binaryFraction}` : `${binaryNumber}`;
 };
 
 const convert = () => {
