@@ -1,3 +1,6 @@
+// h2 element
+let h2tag = document.querySelector('.js-h2')
+
 // Input and output field elements
 let userInput = document.querySelector('.js-input');
 let userOutput = document.querySelector('.js-output');
@@ -9,7 +12,7 @@ userOutput.value = '';
 // Button elements
 let convertButton = document.querySelector('.js-convert');
 let resetButton = document.querySelector('.js-reset');
-let swapButton = document.querySelector('.js-swapButton');
+let swapButton = document.querySelector('.js-swap');
 
 // Error message element
 let errorElement = document.querySelector('.js-error');
@@ -158,6 +161,32 @@ const convert = () => {
   handleInput(userInput.value);
   decimalToBinary(userOutput);
 }
+
+// If flips isDecimal value and changes prompt message
+const swap = () => {
+  if (isDecimal) {
+    isDecimal = false;
+    h2tag.innerHTML = 'Enter Binary Number';
+  } else {
+    isDecimal = true;
+    h2tag.innerHTML = 'Enter Decimal Number';
+  }
+  
+  reset();
+}
+
+// Clears input and output fields
+const reset = () => {
+  userInput.value = '';
+  userOutput.value = '';
+  errorElement.innerHTML = '';
+}
  
 // Runs convert function when convert button is pressed
 convertButton.addEventListener('click', () => convert());
+
+// Swaps between decimal and binary conversion
+swapButton.addEventListener('click', () => swap());
+
+// Clears user input field
+resetButton.addEventListener('click', () => reset());
