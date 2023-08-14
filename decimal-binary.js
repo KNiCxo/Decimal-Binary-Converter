@@ -6,7 +6,7 @@ let userInput = document.querySelector('.js-input');
 let userOutput = document.querySelector('.js-output');
 
 // Clears fields when page is opened
-userInput.value = '';
+userInput.value = '101';
 userOutput.value = '';
 
 // Button elements
@@ -18,7 +18,7 @@ let swapButton = document.querySelector('.js-swap');
 let errorElement = document.querySelector('.js-error');
 
 // Boolean to check if converting to binary or decimal
-let isDecimal = true;
+let isDecimal = false;
 
 // Boolean to check if the input contains a fraction
 let isFraction = false;
@@ -40,14 +40,21 @@ const checkInput = (value) => {
     return false;
   }
 
-  // If input contains more than digits 0-9 and '.', flag as an error
-  if (value.match('[^.0-9]')) {
-    errorElement.innerHTML = `Error: Must only contain decimal digits`;
-    return false;
+  if (isDecimal) {
+    // If input contains more than digits 0-9 and '.', flag as an error
+    if (value.match('[^.0-9]')) {
+      errorElement.innerHTML = `Error: Must only contain decimal digits`;
+      return false;
+    }
   } else {
-    // Clears error if current input has none
-    errorElement.innerHTML = ``;
+    if (value.match('[^.0-1]')) {
+      errorElement.innerHTML = `Error: Must only contain binary digits`;
+      return false;
+    }
   }
+
+  // Clears error if current input has none
+  errorElement.innerHTML = ``;
 
   // Iterates through input and finds total number of decimal points and position of
   // the last seen decimal point
@@ -95,7 +102,7 @@ const handleInput = (value) => {
 
 // Function to convert decimal numbers to binary
 const decimalToBinary = (output) => {
-  // Stores binary whole number and fraction portions to be combined later
+  // Stores binary whole number and fraction portions seperately to be combined later
   let binaryNumber = '';
   let binaryFraction = '';
 
@@ -147,6 +154,29 @@ const decimalToBinary = (output) => {
   output.value = `${binaryNumber}${binaryFraction}`;
 };
 
+// Function to convert binary numbers to decimal
+const binaryToDecimal = (output) => {
+  // Stores decimal whole number and fraction portions seperately to be combined later
+  let decimalNumber = 0;
+  let decimalFraction = 0;
+
+  // Values to multiply whole number and fraction portions
+  let wholeNumFactor = 1;
+  let fractionFactor = 0.5;
+
+  // Loops through entire string
+  for (let i = wholeNumber.length - 1; i >= 0; i--) {
+    // Multiplies binary digit by whole number factor and adds to variable
+    decimalNumber += (Number(wholeNumber.charAt(i)) * wholeNumFactor);
+
+    //Multiplies factor by 2 for the next iteration
+    wholeNumFactor *= 2;
+  }
+
+  // Outputs final conversion
+  output.value = `${decimalNumber + decimalFraction}`;
+};
+
 // Function to check and handle input and convert from decimal to binary or vice versa
 const convert = () => {
   // Clears output field before each call of the function
@@ -159,7 +189,13 @@ const convert = () => {
   
   // Handles input accordingly and converts
   handleInput(userInput.value);
-  decimalToBinary(userOutput);
+
+  // Converts to binary or decimal depending on boolean value
+  if (isDecimal) {
+    decimalToBinary(userOutput);
+  } else {
+    binaryToDecimal(userOutput);
+  }
 }
 
 // If flips isDecimal value and changes prompt message
@@ -172,6 +208,7 @@ const swap = () => {
     h2tag.innerHTML = 'Enter Decimal Number';
   }
   
+  // Clears fields
   reset();
 }
 
