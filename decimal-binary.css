@@ -19,14 +19,17 @@ body {
   font-family: oswald-regular;
 }
 
+/* Styling for h2 tag */
 h2 {
   font-size: 50px;
+  margin-bottom: 30px;
 }
 
-input {
-  width: 300px;
-  height: 60px;
-  font-size: 50px;
+/* Styling for input/output */
+input, textarea {
+  width: 375px;
+  height: 75px;
+  font-size: 40px;
   font-family: oswald-regular;
   text-align: center;
   background-color: rgb(63, 55, 55);
@@ -37,6 +40,11 @@ input {
   color: white;
 }
 
+textarea {
+  width: 575px;
+}
+
+/* Styling for buttons */
 button {
   margin-bottom: 40px;
   border: none;
@@ -62,6 +70,7 @@ button {
   background-color: rgb(111, 111, 190);
 }
 
+/* Styling for error message */
 p {
   margin-top: 30px;
   font-size: 30px;
