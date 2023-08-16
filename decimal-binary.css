@@ -1,4 +1,68 @@
-/* Styling for output elements */
-.results {
-  display: inline-block;
+/* Roboto Thin font */
+@font-face {
+  src: url(fonts/Roboto/Roboto-Thin.ttf);
+  font-family: roboto-thin;
+}
+
+/* Oswald Regular font */
+@font-face {
+  src: url(fonts/Oswald/static/Oswald-Regular.ttf);
+  font-family: oswald-regular;
+}
+
+/* Styling for body */
+body {
+  background-color: rgb(45, 42, 42);
+  color: white;
+  text-align: center;
+  margin: 215px;
+  font-family: oswald-regular;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+input {
+  width: 300px;
+  height: 60px;
+  font-size: 50px;
+  font-family: oswald-regular;
+  text-align: center;
+  background-color: rgb(63, 55, 55);
+  border-color: rgb(45, 42, 42);
+  border-radius: 10px;
+  border-width: 2px;
+  outline: none;
+  color: white;
+}
+
+button {
+  margin-bottom: 40px;
+  border: none;
+  color: white;
+  width: 120px;
+  height: 50px;
+  font-family: oswald-regular;
+  font-size: 30px;
+  margin: 30px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.convert {
+  background-color: green;
+}
+
+.reset {
+  background-color: red;
+}
+
+.swap {
+  background-color: rgb(111, 111, 190);
+}
+
+p {
+  margin-top: 30px;
+  font-size: 30px;
 }

@@ -214,9 +214,11 @@ const swap = () => {
   if (isDecimal) {
     isDecimal = false;
     h2tag.innerHTML = 'Enter Binary Number';
+    document.title = 'Binary to Decimal Converter';
   } else {
     isDecimal = true;
     h2tag.innerHTML = 'Enter Decimal Number';
+    document.title = 'Decimal to Binary Converter';
   }
   
   // Clears fields
