@@ -6,7 +6,7 @@ let userInput = document.querySelector('.js-input');
 let userOutput = document.querySelector('.js-output');
 
 // Clears fields when page is opened
-userInput.value = '101';
+userInput.value = '';
 userOutput.value = '';
 
 // Button elements
@@ -18,7 +18,7 @@ let swapButton = document.querySelector('.js-swap');
 let errorElement = document.querySelector('.js-error');
 
 // Boolean to check if converting to binary or decimal
-let isDecimal = false;
+let isDecimal = true;
 
 // Boolean to check if the input contains a fraction
 let isFraction = false;
@@ -43,12 +43,12 @@ const checkInput = (value) => {
   if (isDecimal) {
     // If input contains more than digits 0-9 and '.', flag as an error
     if (value.match('[^.0-9]')) {
-      errorElement.innerHTML = `Error: Must only contain decimal digits`;
+      errorElement.innerHTML = `Error: Must only contain a decimal number (no spaces)`;
       return false;
     }
   } else {
     if (value.match('[^.0-1]')) {
-      errorElement.innerHTML = `Error: Must only contain binary digits`;
+      errorElement.innerHTML = `Error: Must only contain a binary number (no spaces)`;
       return false;
     }
   }
@@ -88,7 +88,7 @@ const handleInput = (value) => {
     // If position of decimal point is at the beginning, there is no whole number
     if (periodPos === 0) {
       wholeNumber = '';
-      fraction = value.substring(0, value.length);
+      fraction = '0' + value.substring(0, value.length);
     } else {
       // Else whole number is before decimal point and fraction is after
       wholeNumber = value.substring(0, periodPos);
@@ -164,13 +164,24 @@ const binaryToDecimal = (output) => {
   let wholeNumFactor = 1;
   let fractionFactor = 0.5;
 
-  // Loops through entire string
+  // Loops through whole number string
   for (let i = wholeNumber.length - 1; i >= 0; i--) {
     // Multiplies binary digit by whole number factor and adds to variable
     decimalNumber += (Number(wholeNumber.charAt(i)) * wholeNumFactor);
 
     //Multiplies factor by 2 for the next iteration
     wholeNumFactor *= 2;
+  }
+
+  // Loops through fraction string if there is one
+  if (isFraction) {
+    for (let i = 2; i < fraction.length; i++) {
+      // Multiplies binary digit by fraction factor and adds to variable
+      decimalFraction += (Number(fraction.charAt(i)) * fractionFactor);
+
+      // Divides factor by 2 for the next iteration
+      fractionFactor /= 2;
+    }
   }
 
   // Outputs final conversion
