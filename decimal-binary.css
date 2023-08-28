@@ -40,6 +40,11 @@ input, textarea {
   color: white;
 }
 
+textarea {
+  resize: vertical;
+  max-height: 650px;
+}
+
 .buttons {
   width: 300px;
   margin: 0 auto;
@@ -90,7 +95,7 @@ p {
   font-size: 30px;
 }
 
-/* Styling for different widthsm */
+/* Styling for different widths */
 @media only screen and (min-width: 800px){
   h2 {
     font-size: 65px;
@@ -117,27 +122,6 @@ p {
 @media only screen and (min-width: 1000px){
   body {
     margin-top: 130px;
-  }
-
-  h2 {
-    font-size: 65px;
-  }
-
-  .buttons {
-    width: 700px;
-  }
-
-  button {
-    width: 180px;
-    margin: 40px 5px;
-  }
-
-  input {
-    width: 450px;
-  }
-
-  textarea {
-    width: 600px;
   }
 }
 
